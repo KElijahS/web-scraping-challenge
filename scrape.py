@@ -36,7 +36,7 @@ def scrape():
     url_facts = 'https://galaxyfacts-mars.com/'
     df = pd.read_html(url_facts)
     facts_df = df[0]
-    facts_df = facts_df.rename(columns = {'Labels':'Info', 1:'Mars', 2:'Earth'})
+    facts_df = facts_df.rename(columns = {0:'Info', 1:'Mars', 2:'Earth'})
     facts_df = facts_df.set_index('Info')
     facts_table = facts_df.to_html()
     facts_table = facts_table.replace('\n','')
@@ -53,7 +53,7 @@ def scrape():
     hemi = soup.find_all('div', class_='description')
 
     count = 0
-    for each in hemis:
+    for each in hemi:
         title = each.a.find('h3')
         title = title.text
         titles.append(title)
@@ -62,7 +62,7 @@ def scrape():
             break
 
     count = 0
-    for each in hemis:
+    for each in hemi:
         src = each.find('a')['href']
         site_url = url_hemi + src
         urls.append(site_url)
