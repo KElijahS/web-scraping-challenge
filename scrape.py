@@ -12,6 +12,8 @@ def init_browser():
     browser = Browser('chrome', **executable_path, headless=False)
 
 def scrape():
+    mars_data = {}
+    browser = init_browser()
 #News title and snippit
     url = 'https://redplanetscience.com/'
     browser.visit(url)
@@ -86,5 +88,8 @@ def scrape():
     hemisphere_urls = [hemi1, hemi2, hemi3, hemi4]
 
     mars_data['hemisphere_urls'] = hemisphere_urls
+    mars_data['news_p'] = news_p
+    mars_data['featured_image_url'] = featured_image_url
+    mars_data['facts_table'] = facts_table
 
     return mars_data
